@@ -1,0 +1,57 @@
+/* 自动生成，请勿手改。改值改 tokens.json 后跑 `node build-tokens.js`。 */
+/* 9.0 token 单一数值源 → CSS 变量。所有文本 lineHeight = fontSize × 1.5 */
+:root{
+  /* 颜色 */
+  --v9-primary: #FF6435;
+  --v9-secondary: #FFB19A;
+  --v9-on-primary: #FFFFFF;
+  --v9-text-primary: #222222;
+  --v9-text-body: #444444;
+  --v9-text-secondary: #757575;
+  --v9-text-tertiary: #999999;
+  --v9-text-muted: #CCCCCC;
+  --v9-surface-canvas: #F0F1F5;
+  --v9-surface-default: #FFFFFF;
+  --v9-surface-inset: #F6F8FB;
+  --v9-outline: #EBECF2;
+  --v9-error: #FF1930;
+  --v9-success: #00B42A;
+  --v9-disable: #CCCCCC;
+  --v9-info-bg: #FFF5E8;
+  --v9-warning-bg: #FFEAE8;
+  --v9-tag-brand-bg: #FFF0EB;
+  --v9-tag-success-bg: #DBFFD7;
+  /* 圆角 */
+  --v9-radius-xs: 4px;
+  --v9-radius-sm: 8px;
+  --v9-radius-md: 12px;
+  --v9-radius-lg: 16px;
+  --v9-radius-xl: 30px;
+  --v9-radius-full: 1000px;
+  /* 间距 */
+  --v9-space-xs: 4px;
+  --v9-space-sm: 8px;
+  --v9-space-md: 12px;
+  --v9-space-lg: 16px;
+  --v9-space-xl: 24px;
+  --v9-page-margin: 12px;
+  /* 阴影（基底 #0F284D） */
+  --v9-shadow-1: 0px 4px 12px rgba(15,40,77,0.06);
+  --v9-shadow-2: 0px 8px 24px rgba(15,40,77,0.08);
+  --v9-shadow-3: 0px 12px 24px rgba(15,40,77,0.08);
+  --v9-shadow-4: 0px 16px 32px rgba(15,40,77,0.10);
+  --v9-shadow-5: 0px 30px 50px rgba(15,40,77,0.12);
+  /* 字族 */
+  --v9-font-cn: 'PingFang SC','Noto Sans SC',sans-serif;
+  --v9-font-num: 'Barlow Semi Condensed','PingFang SC',sans-serif;
+  /* 字号（lineHeight = 字号 × 1.5） */
+  --v9-fz-display-l: 45px;
+  --v9-fz-display-m: 36px;
+  --v9-fz-display-s: 30px;
+  --v9-fz-headline-l: 22px;
+  --v9-fz-headline-m: 18px;
+  --v9-fz-headline-s: 16px;
+  --v9-fz-body-l: 14px;
+  --v9-fz-body-m: 12px;
+  --v9-fz-label-m: 11px;
+}

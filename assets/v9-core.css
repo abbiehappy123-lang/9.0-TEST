@@ -1,0 +1,226 @@
+/* =========================================================
+   9.0 设计规范 — H5 组件库底座 (组件样式/结构)
+   ⚠️ 本文件不含任何 token 数值。所有 token 来自 v9-tokens.css
+      (由 tokens.json 经 build-tokens.js 自动生成 —— 单一数值源)。
+   改颜色/间距/圆角/阴影 → 改 tokens.json → 跑 build-tokens.js，本文件不用动。
+   组件样式只用 var(--v9-*) 引用，组件属性命名对齐 Figma 变体。
+   行高规则: 统一 = 字号 × 1.5 (16→24 / 14→21 / 12→18 / 18→27 / 22→33)
+   ========================================================= */
+
+@import url('v9-tokens.css');   /* 单一数值源(自动生成)。或在页面中先于本文件单独 <link> 引入 */
+
+/* 页面容器(可选): iPhone14 逻辑尺寸 375，内容区左右 margin 12 */
+.v9-page{width:375px;min-height:844px;background:var(--v9-surface-canvas);
+  font-family:var(--v9-font-cn);color:var(--v9-text-primary);position:relative;overflow:hidden;}
+.v9-content{padding:0 var(--v9-page-margin);display:flex;flex-direction:column;gap:12px;}
+
+/* =========================================================
+   一、Button —— mode=primary|subtle ; status=default|visited|disabled
+   size = full | large | medium | small
+   ========================================================= */
+.v9-btn{display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--v9-font-cn);font-weight:600;border-radius:var(--v9-radius-full);
+  border:1px solid transparent;cursor:pointer;box-sizing:border-box;white-space:nowrap;
+  transition:opacity .15s ease;}
+.v9-btn:active{opacity:.88;}
+.v9-btn--full{width:100%;height:50px;font-size:18px;line-height:27px;padding:0 16px;}
+.v9-btn--large{height:40px;font-size:16px;line-height:24px;padding:0 18px;}
+.v9-btn--medium{height:35px;font-size:14px;line-height:21px;padding:0 16px;}
+.v9-btn--small{height:28px;font-size:14px;line-height:21px;padding:0 16px;}
+.v9-btn--primary{background:var(--v9-primary);color:var(--v9-on-primary);}
+.v9-btn--primary.is-visited{background:var(--v9-secondary);color:var(--v9-on-primary);}
+.v9-btn--primary.is-disabled{background:var(--v9-disable);color:var(--v9-on-primary);cursor:not-allowed;}
+.v9-btn--subtle{background:transparent;color:var(--v9-primary);border-color:var(--v9-primary);}
+.v9-btn--subtle.is-visited{color:var(--v9-secondary);border-color:var(--v9-secondary);}
+.v9-btn--subtle.is-disabled{background:var(--v9-disable);color:var(--v9-on-primary);border-color:transparent;cursor:not-allowed;}
+
+/* =========================================================
+   二、Tag —— variant=outline|light|solid ; status=default|success|error|tertiary
+   size=default|s
+   ========================================================= */
+.v9-tag{display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--v9-font-cn);font-size:12px;line-height:18px;font-weight:400;
+  border-radius:var(--v9-radius-xs);border:1px solid transparent;box-sizing:border-box;}
+.v9-tag--default-size{padding:1px 4px;}
+.v9-tag--s{padding:0 2px;}
+.v9-tag--light.is-default{background:var(--v9-tag-brand-bg);color:var(--v9-primary);}
+.v9-tag--light.is-success{background:var(--v9-tag-success-bg);color:var(--v9-success);}
+.v9-tag--light.is-error{background:var(--v9-tag-brand-bg);color:var(--v9-error);}
+.v9-tag--light.is-tertiary{background:var(--v9-surface-canvas);color:var(--v9-text-secondary);}
+.v9-tag--outline.is-default{border-color:var(--v9-primary);color:var(--v9-primary);}
+.v9-tag--outline.is-success{border-color:var(--v9-success);color:var(--v9-success);}
+.v9-tag--outline.is-error{border-color:var(--v9-error);color:var(--v9-error);}
+.v9-tag--outline.is-tertiary{border-color:var(--v9-text-tertiary);color:var(--v9-text-secondary);}
+.v9-tag--solid.is-default{background:var(--v9-primary);color:#fff;}
+.v9-tag--solid.is-success{background:var(--v9-success);color:#fff;}
+.v9-tag--solid.is-error{background:var(--v9-error);color:#fff;}
+.v9-tag--solid.is-tertiary{background:var(--v9-text-tertiary);color:#fff;}
+
+/* =========================================================
+   三、Alert —— variant=info|warning ; mode=standard|contained ; size=default|small
+   ========================================================= */
+.v9-alert{display:flex;align-items:center;gap:8px;box-sizing:border-box;
+  font-family:var(--v9-font-cn);padding:12px 10px 12px 16px;}
+.v9-alert--standard{width:100%;border-radius:0;}
+.v9-alert--contained{width:100%;border-radius:var(--v9-radius-md);}
+.v9-alert--info{background:var(--v9-info-bg);}
+.v9-alert--warning{background:var(--v9-warning-bg);}
+.v9-alert__icon{flex:none;font-size:14px;line-height:1;}
+.v9-alert--info .v9-alert__icon{color:var(--v9-primary);}
+.v9-alert--warning .v9-alert__icon{color:var(--v9-error);}
+.v9-alert__text{flex:1;color:var(--v9-text-body);}
+.v9-alert--default .v9-alert__text{font-size:14px;line-height:21px;font-weight:600;}
+.v9-alert--small .v9-alert__text{font-size:12px;line-height:18px;font-weight:400;}
+.v9-alert__arrow{flex:none;font-size:14px;color:var(--v9-text-tertiary);}
+
+/* =========================================================
+   四、CellCard —— 页面级卡片: 宽351 / padding16 / 圆角16 / Level1
+   ========================================================= */
+.v9-card{width:351px;box-sizing:border-box;background:var(--v9-surface-default);
+  border-radius:var(--v9-radius-lg);padding:16px;box-shadow:var(--v9-shadow-1);
+  font-family:var(--v9-font-cn);display:flex;flex-direction:column;}
+.v9-card__header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.v9-card__title{font-size:16px;line-height:24px;font-weight:600;color:var(--v9-text-primary);}
+.v9-card__subtitle{font-size:14px;line-height:21px;font-weight:400;color:var(--v9-text-secondary);margin-top:4px;}
+/* 操作链接：次级导航(查看/全部/展开/收起)默认 Secondary 灰；主操作才加 --primary 修饰。
+   箭头须为独立图标元素(.v9-ic)，文案不含箭头符号，箭头与文字同色。详见 custom-rules「链接/图标/操作样式规则」。 */
+.v9-card__action{display:inline-flex;align-items:center;gap:2px;flex:none;
+  font-size:14px;line-height:21px;font-weight:400;color:var(--v9-text-secondary);cursor:pointer;}
+.v9-card__action--primary{color:var(--v9-primary);}
+.v9-ic{flex:none;display:inline-flex;}            /* 独立图标元素，颜色随 currentColor(与文字同色) */
+.v9-ic svg{display:block;}
+.v9-card__content{margin-top:8px;}   /* Header↔Content = 8px */
+.v9-card__footer{margin-top:16px;}    /* Content↔Footer = 16px */
+.v9-card__subtle{background:var(--v9-surface-inset);border-radius:var(--v9-radius-md);padding:12px;}
+.v9-list-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;}
+.v9-list-row__k{font-size:14px;line-height:21px;color:var(--v9-text-body);}
+.v9-list-row__v{font-size:14px;line-height:21px;color:var(--v9-text-primary);font-family:var(--v9-font-num);font-weight:500;}
+
+/* =========================================================
+   五、Status bar —— theme=white|black ; 44px (仅全屏沉浸页单独使用)
+   ========================================================= */
+.v9-statusbar{height:44px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;box-sizing:border-box;font-family:var(--v9-font-num);font-weight:600;font-size:15px;}
+.v9-statusbar--white{color:var(--v9-surface-default);}
+.v9-statusbar--black{color:var(--v9-text-primary);}
+.v9-statusbar__icons{display:flex;gap:5px;align-items:center;}
+/* 状态栏图标：基座自带（源自 Figma App bars 组件 200:128 Status），mask 取形状、色跟随 currentColor */
+.v9-statusbar__icons i{display:block;background-color:currentColor;}
+.v9-statusbar__icons .v9-ic-cellular{width:17px;height:11px;
+  -webkit-mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxNyAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDAwIj48cmVjdCB4PSIwIiB5PSI3LjUiIHdpZHRoPSIzIiBoZWlnaHQ9IjMuNSIgcng9IjAuNiIvPjxyZWN0IHg9IjQuNjY3IiB5PSI1IiB3aWR0aD0iMyIgaGVpZ2h0PSI2IiByeD0iMC42Ii8+PHJlY3QgeD0iOS4zMzMiIHk9IjIuNSIgd2lkdGg9IjMiIGhlaWdodD0iOC41IiByeD0iMC42Ii8+PHJlY3QgeD0iMTQiIHk9IjAiIHdpZHRoPSIzIiBoZWlnaHQ9IjExIiByeD0iMC42Ii8+PC9zdmc+") center/contain no-repeat;
+          mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxNyAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDAwIj48cmVjdCB4PSIwIiB5PSI3LjUiIHdpZHRoPSIzIiBoZWlnaHQ9IjMuNSIgcng9IjAuNiIvPjxyZWN0IHg9IjQuNjY3IiB5PSI1IiB3aWR0aD0iMyIgaGVpZ2h0PSI2IiByeD0iMC42Ii8+PHJlY3QgeD0iOS4zMzMiIHk9IjIuNSIgd2lkdGg9IjMiIGhlaWdodD0iOC41IiByeD0iMC42Ii8+PHJlY3QgeD0iMTQiIHk9IjAiIHdpZHRoPSIzIiBoZWlnaHQ9IjExIiByeD0iMC42Ii8+PC9zdmc+") center/contain no-repeat;}
+.v9-statusbar__icons .v9-ic-wifi{width:16px;height:11px;
+  -webkit-mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxNiAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDAwIj48cGF0aCBkPSJNOCAxLjZjMi41IDAgNC44IDAuOSA2LjUgMi41bC0xLjMgMS40QTcuNCA3LjQgMCAwIDAgOCAzLjUgNy40IDcuNCAwIDAgMCAyLjggNS41TDEuNSA0LjFBOS4yIDkuMiAwIDAgMSA4IDEuNloiLz48cGF0aCBkPSJNOCA1YzEuNSAwIDIuOSAwLjYgNCAxLjZsLTEuNCAxLjRhMy43IDMuNyAwIDAgMC01LjIgMEw0IDYuNkE1LjYgNS42IDAgMCAxIDggNVoiLz48cGF0aCBkPSJNOCA4LjJjMC43IDAgMS4zIDAuMyAxLjggMC44TDggMTAuOCA2LjIgOWMwLjUtMC41IDEuMS0wLjggMS44LTAuOFoiLz48L3N2Zz4=") center/contain no-repeat;
+          mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxNiAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMDAwIj48cGF0aCBkPSJNOCAxLjZjMi41IDAgNC44IDAuOSA2LjUgMi41bC0xLjMgMS40QTcuNCA3LjQgMCAwIDAgOCAzLjUgNy40IDcuNCAwIDAgMCAyLjggNS41TDEuNSA0LjFBOS4yIDkuMiAwIDAgMSA4IDEuNloiLz48cGF0aCBkPSJNOCA1YzEuNSAwIDIuOSAwLjYgNCAxLjZsLTEuNCAxLjRhMy43IDMuNyAwIDAgMC01LjIgMEw0IDYuNkE1LjYgNS42IDAgMCAxIDggNVoiLz48cGF0aCBkPSJNOCA4LjJjMC43IDAgMS4zIDAuMyAxLjggMC44TDggMTAuOCA2LjIgOWMwLjUtMC41IDEuMS0wLjggMS44LTAuOFoiLz48L3N2Zz4=") center/contain no-repeat;}
+.v9-statusbar__icons .v9-ic-battery{width:25px;height:12px;
+  -webkit-mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyNSAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjIxIiBoZWlnaHQ9IjExIiByeD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTgiIGhlaWdodD0iOCIgcng9IjEuNSIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjIzIiB5PSI0IiB3aWR0aD0iMS41IiBoZWlnaHQ9IjQiIHJ4PSIwLjc1IiBmaWxsPSIjMDAwIi8+PC9zdmc+") center/contain no-repeat;
+          mask:url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyNSAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjIxIiBoZWlnaHQ9IjExIiByeD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMTgiIGhlaWdodD0iOCIgcng9IjEuNSIgZmlsbD0iIzAwMCIvPjxyZWN0IHg9IjIzIiB5PSI0IiB3aWR0aD0iMS41IiBoZWlnaHQ9IjQiIHJ4PSIwLjc1IiBmaWxsPSIjMDAwIi8+PC9zdmc+") center/contain no-repeat;}
+
+/* =========================================================
+   六、App bar —— type=flat|text|none|icon ; 88px(状态栏44+导航44)
+   flat 带底线分割; text 右侧操作文字; icon 右侧图标
+   ========================================================= */
+.v9-appbar{width:375px;box-sizing:border-box;background:var(--v9-surface-default);font-family:var(--v9-font-cn);}
+.v9-appbar--flat{box-shadow:inset 0 -0.5px 0 0 var(--v9-outline);}
+.v9-appbar__nav{height:44px;display:flex;align-items:center;justify-content:center;position:relative;padding:0 12px;}
+.v9-appbar__back{position:absolute;left:8px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:var(--v9-text-primary);cursor:pointer;}
+/* 返回箭头：基座自带图标（源自 Figma App bars 组件 200:185 返回组），mask 跟随 color */
+.v9-appbar__back::before{content:"";width:10px;height:17.5px;background-color:currentColor;
+  -webkit-mask:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIxNS4zIDExLjggOS40IDE2LjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4wODM4IDIwTDI0LjM1NTcgMTMuNTc1MkMyNC41NDgxIDEzLjM3ODMgMjQuNTQ4MSAxMy4wNTg0IDI0LjM1NTcgMTIuODYyTDIzLjY1ODcgMTIuMTQ3N0MyMy40NjY0IDExLjk1MDggMjMuMTU0MSAxMS45NTA4IDIyLjk2MjMgMTIuMTQ3N0wxNS42NDQ2IDE5LjY0MzFDMTUuNDUxOCAxOS44NDA2IDE1LjQ1MTggMjAuMTU5NCAxNS42NDQ2IDIwLjM1NjlMMjIuOTYyMyAyNy44NTIzQzIzLjE1NDEgMjguMDQ5MiAyMy40NjY0IDI4LjA0OTIgMjMuNjU4NyAyNy44NTIzTDI0LjM1NTcgMjcuMTM4NUMyNC41NDgxIDI2Ljk0MTYgMjQuNTQ4MSAyNi42MjE3IDI0LjM1NTcgMjYuNDI0OEwxOC4wODM4IDIwWiIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==") center/contain no-repeat;
+          mask:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIxNS4zIDExLjggOS40IDE2LjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4wODM4IDIwTDI0LjM1NTcgMTMuNTc1MkMyNC41NDgxIDEzLjM3ODMgMjQuNTQ4MSAxMy4wNTg0IDI0LjM1NTcgMTIuODYyTDIzLjY1ODcgMTIuMTQ3N0MyMy40NjY0IDExLjk1MDggMjMuMTU0MSAxMS45NTA4IDIyLjk2MjMgMTIuMTQ3N0wxNS42NDQ2IDE5LjY0MzFDMTUuNDUxOCAxOS44NDA2IDE1LjQ1MTggMjAuMTU5NCAxNS42NDQ2IDIwLjM1NjlMMjIuOTYyMyAyNy44NTIzQzIzLjE1NDEgMjguMDQ5MiAyMy40NjY0IDI4LjA0OTIgMjMuNjU4NyAyNy44NTIzTDI0LjM1NTcgMjcuMTM4NUMyNC41NDgxIDI2Ljk0MTYgMjQuNTQ4MSAyNi42MjE3IDI0LjM1NTcgMjYuNDI0OEwxOC4wODM4IDIwWiIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==") center/contain no-repeat;}
+.v9-appbar__title{font-size:18px;line-height:27px;font-weight:600;color:var(--v9-text-primary);}
+.v9-appbar__action{position:absolute;right:16px;font-size:14px;line-height:21px;font-weight:400;color:var(--v9-text-primary);cursor:pointer;}
+.v9-appbar__icons{position:absolute;right:12px;display:flex;gap:8px;}
+
+/* 返回按钮(独立) 40×40 */
+.v9-back{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:20px;color:var(--v9-text-primary);cursor:pointer;}
+
+/* =========================================================
+   七、CardHeader(独立组合用) —— actiontype=none|link|expand ; showSubtitle
+   ========================================================= */
+.v9-cardheader{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--v9-font-cn);}
+.v9-cardheader__title{font-size:16px;line-height:24px;font-weight:600;color:var(--v9-text-primary);}
+.v9-cardheader__subtitle{font-size:14px;line-height:21px;color:var(--v9-text-secondary);margin-top:4px;}
+.v9-cardheader__link{display:inline-flex;align-items:center;gap:2px;flex:none;font-size:14px;line-height:21px;color:var(--v9-primary);cursor:pointer;}
+.v9-cardheader__expand{display:inline-flex;align-items:center;gap:2px;flex:none;font-size:14px;line-height:21px;color:var(--v9-primary);cursor:pointer;}
+
+/* =========================================================
+   八、CardContent —— contentLayout=editorial|list|media ; surface=pure|subtle
+   ========================================================= */
+.v9-cardcontent{font-family:var(--v9-font-cn);}
+.v9-cardcontent--subtle{background:var(--v9-surface-inset);border-radius:var(--v9-radius-md);padding:12px;}
+.v9-cardcontent__title{font-size:14px;line-height:21px;font-weight:600;color:var(--v9-text-primary);}
+.v9-cardcontent__desc{font-size:14px;line-height:21px;color:var(--v9-text-secondary);margin-top:8px;}
+.v9-cardcontent--subtle .v9-cardcontent__desc{margin-top:4px;}
+/* media: 图左文右 */
+.v9-cardcontent--media{display:flex;gap:8px;align-items:flex-start;}
+.v9-cardcontent__media{width:85px;height:65px;border-radius:var(--v9-radius-md);object-fit:cover;flex:none;position:relative;overflow:hidden;background:var(--v9-surface-inset);}
+
+/* =========================================================
+   九、StatusOverlay —— state=success|failed ; 叠在图片底部 35px 渐变
+   ========================================================= */
+.v9-overlay{position:absolute;left:0;right:0;bottom:0;height:35px;display:flex;align-items:center;justify-content:center;gap:4px;
+  font-family:var(--v9-font-cn);font-size:12px;line-height:18px;color:#fff;
+  border-bottom-left-radius:var(--v9-radius-md);border-bottom-right-radius:var(--v9-radius-md);}
+.v9-overlay--success{background:linear-gradient(180deg,rgba(34,34,34,0) 0%,#222222 100%);}
+.v9-overlay--failed{background:linear-gradient(180deg,rgba(222,69,69,0) 0%,#DE4545 100%);}
+
+/* =========================================================
+   十、TextLink —— importance=important|secondary|theme|error ; size=l|m|s
+   ========================================================= */
+.v9-textlink{display:inline-flex;align-items:center;gap:2px;font-family:var(--v9-font-cn);font-weight:400;cursor:pointer;}
+.v9-textlink--l{font-size:16px;line-height:16px;}
+.v9-textlink--m{font-size:14px;line-height:14px;}
+.v9-textlink--s{font-size:12px;line-height:12px;}
+.v9-textlink--important{color:var(--v9-primary);}
+.v9-textlink--secondary{color:var(--v9-text-secondary);}
+.v9-textlink--theme{color:var(--v9-surface-default);}
+.v9-textlink--error{color:var(--v9-error);}
+
+/* ExpandLink —— state=expand|collapse (文案+箭头随状态) 复用 textlink 配色尺寸 */
+.v9-expandlink{display:inline-flex;align-items:center;gap:2px;font-family:var(--v9-font-cn);cursor:pointer;}
+
+/* =========================================================
+   十一、arrow(图标按钮) —— color=grey|white|orange|red ; size=l|m|s ; icon=arrow|down|up|close
+   用字符占位，真实工程可替换为 SVG sprite
+   ========================================================= */
+.v9-arrow{display:inline-flex;align-items:center;justify-content:center;line-height:1;}
+.v9-arrow--l{font-size:18px;}
+.v9-arrow--m{font-size:14px;}
+.v9-arrow--s{font-size:10px;}
+.v9-arrow--grey{color:var(--v9-text-secondary);}
+.v9-arrow--white{color:var(--v9-surface-default);}
+.v9-arrow--orange{color:var(--v9-primary);}
+.v9-arrow--red{color:var(--v9-error);}
+
+/* =========================================================
+   十二、Tabs —— line ; amount=2|3|4 ; active=1..n (通栏 375，高42)
+   ========================================================= */
+.v9-tabs{width:375px;box-sizing:border-box;height:42px;display:flex;background:var(--v9-surface-default);
+  padding:8px 8px 4px;gap:8px;font-family:var(--v9-font-cn);}
+.v9-tabs__item{flex:1 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:16px;line-height:16px;color:var(--v9-text-secondary);font-weight:400;cursor:pointer;position:relative;}
+.v9-tabs__item.is-active{color:var(--v9-primary);font-weight:600;}
+.v9-tabs__item.is-active::after{content:"";position:absolute;bottom:-4px;width:32px;height:4px;
+  border-radius:2px;background:var(--v9-primary);}
+
+/* =========================================================
+   十三、Home Indicator —— 134×5 圆角full；浅底用黑、深底用白
+   ========================================================= */
+.v9-home-indicator{width:134px;height:5px;border-radius:var(--v9-radius-full);margin:8px auto 0;}
+.v9-home-indicator--dark{background:#000000;}   /* 浅色背景 */
+.v9-home-indicator--light{background:#FFFFFF;}   /* 深色背景 */
+
+/* =========================================================
+   十四、底部操作栏(Bottom Area) —— Level3 上浮
+   ========================================================= */
+.v9-footer{background:var(--v9-surface-default);box-shadow:0px -8px 24px rgba(15,40,77,0.06);
+  padding:12px 12px 8px;box-sizing:border-box;}
+.v9-footer__row{display:flex;gap:12px;}
+
+/* =========================================================
+   十五、Toast —— 居中 #333 圆角8 白字14 Level5
+   ========================================================= */
+.v9-toast{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:#333333;border-radius:var(--v9-radius-sm);color:#fff;font-size:14px;line-height:21px;
+  padding:10px 20px;box-shadow:var(--v9-shadow-5);font-family:var(--v9-font-cn);z-index:9999;}
